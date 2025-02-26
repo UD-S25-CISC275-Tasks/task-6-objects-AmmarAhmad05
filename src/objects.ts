@@ -43,11 +43,10 @@ export function isCorrect(question: Question, answer: string): boolean {
  * be exactly one of the options.
  */
 export function isValid(question: Question, answer: string): boolean {
+    let correctAnswerCheck: boolean = false;
     if (question.type === "short_answer_question") {
         return true;
-    }
-    let correctAnswerCheck: boolean = false;
-    if (question.type === "multiple_choice_question") {
+    } else {
         for (let i = 0; i < question.options.length; i++) {
             if (question.options[i] === answer) {
                 correctAnswerCheck = true;
@@ -85,11 +84,10 @@ export function toShortForm(question: Question): string {
  * Check the unit tests for more examples of what this looks like!
  */
 export function toMarkdown(question: Question): string {
+    let fullQuestionBody: string = "";
     if (question.type === "short_answer_question") {
         return "# " + question.name + "\n" + question.body;
-    }
-    let fullQuestionBody: string = "";
-    if (question.type === "multiple_choice_question") {
+    } else {
         for (let i = 0; i < question.options.length; i++) {
             if (i === question.options.length - 1) {
                 fullQuestionBody += "- " + question.options[i];
